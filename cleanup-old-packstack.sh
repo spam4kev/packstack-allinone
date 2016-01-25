@@ -8,5 +8,5 @@ sudo rm -rf /etc/puppet/ /var/lib/puppet/ /etc/rabbitmq/ /etc/nova/ /etc/glance/
 sudo sh -c 'echo "" > /etc/sysconfig/iptables'
 mv ~/keystonerc_admin ~/keystonerc_admin.$(date +%s)
 mv ~/keystonerc_demo ~/keystonerc_demo.$(date +%s)
-echo "Please Reboot and the run the packstack-install.sh script"
+echo "Please Reboot and the run the install-packstack.sh script"
 echo
