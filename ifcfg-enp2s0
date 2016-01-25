@@ -1,0 +1,8 @@
+NAME="enp2s0"
+DEVICE="enp2s0"
+HWADDR=macaddress
+NM_CONTROLLED=no
+TYPE=OVSPort
+DEVICETYPE=ovs
+OVS_BRIDGE=br-ex
+ONBOOT=yes
