@@ -9,6 +9,8 @@ echo "make sure to have sudo priv's AND run cleanup-old-packstack.sh before runn
 echo
 openstack_host_priv_ip=$2
 gw=$3
+sudo yum install -y https://www.rdoproject.org/repos/rdo-release.rpm
+sudo yum install -y openstack-packstack
 packstack --allinone --provision-demo=n --os-heat-install=y --os-ironic-install=y --os-trove-install=y --os-neutron-lbaas-install=y --os-heat-cfn-install=y --os-heat-cloudwatch-install=y --os-neutron-vpnaas-install=y --neutron-fwaas=y --default-password=$1
 mac=$(facter macaddress_enp2s0)
 sudo mv /etc/sysconfig/networking-scripts/ifcfg-enp2s0 ~/ifcfg-enp2s0-$(date +%s)
