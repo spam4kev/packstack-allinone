@@ -3,7 +3,8 @@
 [[ ! $(grep -i centos /etc/redhat-release) ]] && echo "script only supported on CentOS" && exit
 [[ -z $1 ]] && echo "please pass the first argument containing the desired openstack password" && exit
 [[ -z $2 ]] && echo "please pass the second argument containing the openstack hosts physical NIC IP" && exit
-[[ -z $3 ]] && echo "please pass the second argument containing your LAN's gateway IP" && exit
+[[ -z $3 ]] && echo "please pass the third argument containing your LAN's gateway IP" && exit
+[[ -z $4 ]] && echo "please pass the fourth argument containing desired domain suffix" && exit
 echo "make sure to have sudo priv's AND run cleanup-old-packstack.sh before running this script"
 echo
 openstack_host_priv_ip=$2
@@ -25,5 +26,5 @@ cd ~
 source keystonerc_admin
 neutron net-create external_network --provider:network_type flat --provider:physical_network extnet  --router:external --shared
 sudo openstack-config --set /etc/nova/nova.conf DEFAULT compute_driver libvirt.LibvirtDriver
-sudo openstack-config --set /etc/nova/nova.conf DEFAULT dhcp_domain fitznet.local
+sudo openstack-config --set /etc/nova/nova.conf DEFAULT dhcp_domain $4
 sudo systemctl restart openstack-nova-compute.service
