@@ -29,6 +29,7 @@ source keystonerc_admin
 neutron net-create external_network --provider:network_type flat --provider:physical_network extnet  --router:external --shared
 sudo openstack-config --set /etc/nova/nova.conf DEFAULT compute_driver libvirt.LibvirtDriver
 sudo openstack-config --set /etc/nova/nova.conf DEFAULT dhcp_domain $4
+sudo openstack-config --set /etc/nova/nova.conf DEFAULT resume_guests_state_on_host_boot true
 sudo systemctl restart openstack-nova-compute.service
 sudo openstack-config --set /etc/cinder/cinder.conf keystone_authtoken auth_uri http://$openstack_host_priv_ip:5000
 sudo openstack-config --set /etc/cinder/cinder.conf keystone_authtoken auth_url http://$openstack_host_priv_ip:35357
