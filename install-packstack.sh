@@ -30,3 +30,14 @@ neutron net-create external_network --provider:network_type flat --provider:phys
 sudo openstack-config --set /etc/nova/nova.conf DEFAULT compute_driver libvirt.LibvirtDriver
 sudo openstack-config --set /etc/nova/nova.conf DEFAULT dhcp_domain $4
 sudo systemctl restart openstack-nova-compute.service
+sudo openstack-config --set /etc/cinder/cinder.conf keystone_authtoken auth_uri http://$openstack_host_priv_ip:5000
+sudo openstack-config --set /etc/cinder/cinder.conf keystone_authtoken auth_url http://$openstack_host_priv_ip:35357
+sudo openstack-config --set /etc/cinder/cinder.conf keystone_authtoken auth_plugin password
+sudo openstack-config --set /etc/cinder/cinder.conf keystone_authtoken project_domain_id default
+sudo openstack-config --set /etc/cinder/cinder.conf keystone_authtoken user_domain_id default
+sudo openstack-config --set /etc/cinder/cinder.conf keystone_authtoken project_name services
+sudo openstack-config --set /etc/cinder/cinder.conf keystone_authtoken username cinder
+sudo openstack-config --set /etc/cinder/cinder.conf keystone_authtoken password $OS_PASSWORD
+openstack-services restart cinder
+openstack-services restart cinder-api
+
